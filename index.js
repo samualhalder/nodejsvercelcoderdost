@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const server = express();
 const productRouter = require("./routers/product.router");
 const userRouter = require("./routers/user.router");
+const cors = require("cors");
 // MIDDLEWARES
+server.use(cors());
 server.use(express.json()); //build in middleware -> body perser
 server.use(morgan("dev"));
 //DB connection code
@@ -19,8 +21,6 @@ async function main() {
 
 server.use("/products", productRouter.router);
 server.use("/users", userRouter.router);
-
-
 
 server.listen(8080, () => {
   console.log("server is started!!!");
