@@ -8,15 +8,12 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    try {
-      const res = await axios.get("/products");
-      setProducts(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await axios.get("/products");
+    console.log(res.data);
+    setProducts(res.data);
+    // setTotal(res.data.length)
   };
   const handleClick = (id) => {
-    console.log(typeof id);
     fetch(`http://localhost:8080/products/${id}`, {
       method: "DELETE",
       headers: {
@@ -24,7 +21,7 @@ const ProductList = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         setProducts(products.filter((pro) => pro._id !== id));
       })
       .catch((err) => console.log(err));
@@ -36,10 +33,13 @@ const ProductList = () => {
 
   return (
     <>
-      {products &&
+      {products ? (
         products.map((product, index) => (
           <Product {...product} key={index} handleClick={handleClick}></Product>
-        ))}
+        ))
+      ) : (
+        <h1>hello</h1>
+      )}
     </>
   );
 };
