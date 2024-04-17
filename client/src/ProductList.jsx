@@ -14,7 +14,7 @@ const ProductList = () => {
     // setTotal(res.data.length)
   };
   const handleClick = (id) => {
-    fetch(`http://localhost:8080/products/${id}`, {
+    fetch(`/products/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
